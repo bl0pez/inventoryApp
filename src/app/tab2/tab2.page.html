@@ -1,17 +1,27 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title>Productos</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <form (ngSubmit)="insertProducto()" #productoForm="ngForm" style="height: 100%;">
+    <ion-list style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input [(ngModel)]="producto.nombre" name="nombre" required></ion-input>
+      </ion-item>
+      <ion-item *ngIf="productoForm.submitted && !productoForm.controls['nombre']?.valid">
+        <ion-text color="danger">El nombre es requerido</ion-text>
+      </ion-item>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+      <ion-item>
+        <ion-label position="floating">Descripción</ion-label>
+        <ion-input [(ngModel)]="producto.descripcion" name="descripcion" required></ion-input>
+      </ion-item>
+      <ion-item *ngIf="productoForm.submitted && !productoForm.controls['descripcion']?.valid">
+        <ion-text color="danger">La descripción es requerida</ion-text>
+      </ion-item>
+      <ion-button expand="full" type="submit" style="margin-top: 20px;">Guardar</ion-button>
+    </ion-list>
+  </form>
 </ion-content>
